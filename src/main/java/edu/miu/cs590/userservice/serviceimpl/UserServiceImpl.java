@@ -26,4 +26,9 @@ public class UserServiceImpl implements UserService {
         userRepository.findByEmail(userSaveDto.getEmail()).ifPresent(user -> {throw new UserAlreadyExistException("Email "+user.getEmail()+ " already exist!");});
         return userSaveMapper.toDto(userRepository.save(userSaveMapper.toEntity(userSaveDto)));
     }
+
+    @Override
+    public Boolean checkUser(String email){
+        return userRepository.findByEmail(email).isPresent();
+    }
 }
